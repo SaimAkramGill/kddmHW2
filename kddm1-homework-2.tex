@@ -1,0 +1,186 @@
+\documentclass[a4paper,10pt]{article}
+\setlength{\textheight}{10in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-0.125in}
+\setlength{\oddsidemargin}{-.2in}
+\setlength{\evensidemargin}{-.2in}
+\setlength{\headsep}{0.2in}
+\setlength{\footskip}{0pt}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{float}
+\pagestyle{fancy}
+
+\lhead{Name: \rule{5cm}{0.5pt}}
+\chead{M.Number: \rule{2cm}{0.5pt}}
+\rhead{KDDM1 VO (INP.31101UF)}
+\fancyfoot{}
+
+\begin{document}
+
+{\color{red}	
+	\large
+	\begin{center}
+	\vfill
+	\textbf{You should limit the length of your answers as indicated in the questions!\\Not following these limits will result in deduction of points!}
+	\end{center}
+}
+
+\clearpage
+
+{\color{blue}	
+Questions (1), (2), and (3) are related to each other and you may iterate over those three questions together to improve your results. In all three questions you will be working with the dataset ``debates\_2022.csv'' (available in TeachCenter), which includes transcripts of all talks in the European parliament in 2022 with some additional metadata. All talk transcripts are in English. Your goal in questions (1), (2), and (3) is to extract the most important topics of these talks by clustering the talks.\\
+}
+	
+\begin{enumerate}[topsep=0mm, partopsep=0mm, leftmargin=*]
+
+%%% Question 1
+{\color{blue}	
+\item\textit{Feature Engineering}. Extract the features from the talk transcripts by computing tf-idf scores for words. You can use \href{https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html}{TfIdfVectorizer}. Read the documentation of the vectorizer carefully and decide on the parameters you want to use to obtain most informative features. Before the feature extraction decide whether you need preprocessing including (among others) removal of non-informative instances.
+\begin{enumerate}
+	\item Describe preprocessing steps if any. {\color{red}\textbf{Max. two sentences.}}
+	\item Describe the parameters that you set for the vectorizer. Explain your reasoning? {\color{red}\textbf{Max. one sentence per parameter.}}
+	\item How many features did you extract? Why? {\color{red}\textbf{Max. one sentence.}}
+\end{enumerate}
+}
+
+%%% Your answer here
+
+\textbf{Answer (a)} - Preprocessing:
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\textbf{Answer (b)} - Feature computation:
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\textbf{Answer (c)} - Number of features:
+\begin{itemize}
+	\item
+\end{itemize}
+
+
+\clearpage
+{\color{blue}
+	\clearpage\item\textit{Clustering}. Using the features that you extracted implement a clustering method of your choice. Use an appropriate evaluation metric to evaluate the quality of your clustering result.
+	\begin{enumerate}
+		\item What is your clustering algorithm and why? {\color{red}\textbf{Max. two sentences.}}
+		\item How many clusters did you extract? How did you decide on the number of clusters. {\color{red}\textbf{Max. one sentence.}}
+		\item Which evaluation metric did you use to evaluate your results. What is your evaluation score? {\color{red}\textbf{Max. two sentences.}}
+		\item Interpret your clusters, e.g., by looking into ten most important words in each cluster. {\color{red}\textbf{Max. one sentence per cluster.}}
+\end{enumerate}}
+
+%%% Your answer here
+\textbf{Answer (a)} - Clustering algorithm:
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\textbf{Answer (b)} - Number of clusters:
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\textbf{Answer (c)} - Evaluation:
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\textbf{Answer (d)} - Interpretation:
+\begin{itemize}
+	\item 
+\end{itemize}
+
+
+
+\clearpage
+{\color{blue}
+\newpage\item\textit{Dimensionality Reduction for Visualization}. Perform dimensionality reduction with PCA on the features that you extracted previously. Use your clustering results and plot data points in 2D PCA space with clusters as colors for your data points.
+\begin{enumerate}
+	\item Your plot.
+	\item Are clusters well separated in your plot? {\color{red}\textbf{Max. one sentence.}}
+	\item Interpret the PCA dimensions that you used for visualization. {\color{red}\textbf{Max. one sentence per dimension.}}
+\end{enumerate}
+}
+
+%%% Your answer here
+\textbf{Answer (a)} - Your plot:
+\begin{figure}[H]
+	\centering
+	\adjustbox{frame}{
+		\includegraphics[width=0.8\textwidth]{example-image}
+	}
+	\caption{Cluster quality vs. number of clusters}
+	\label{fig:example}
+\end{figure}
+
+\textbf{Answer (b)} -  Cluster separation:
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\textbf{Answer (c)} - Interpretation:
+\begin{itemize}
+	\item PCA-1 ...
+	\item PCA-2 ...
+\end{itemize}
+
+
+\clearpage
+{\color{blue}
+\clearpage\item \textit{Classification}. Given the dataset ``king\_rook\_vs\_king.csv'' (available in TeachCenter), with data on chess endgames featuring the white king and a white rook against the black king, implement a classifier of your choice to predict whether the white will win. Each endgame is described by the rank and file positions of the white king, the white rook, and the black king (six features in total). The target variable is the depth of white win (a categorical variable with either draw or zero, one, ..., sixteen indicating that the white wins in that many moves). Transform the target variable to obtain the win depth levels as:
+\begin{itemize}
+	\item draw: 0
+	\item zero, one, two, three, four: 1
+	\item five, six, seven, eight: 2
+	\item nine, ten, eleven, twelve: 3
+	\item thirteen, fourteen, fifteen, sixteen: 4.
+\end{itemize}
+Use this new variable as your classification target. Evaluate your classifier by a metric of your choice. If your model has hyperparameters cross-validate.
+
+\begin{enumerate}
+\item Describe preprocessing and feature transformations steps if you made any. {\color{red}\textbf{Max. two sentences.}}
+\item What is your model and why? {\color{red}\textbf{Max. two sentences.}}
+\item Describe your evaluation setup. {\color{red}\textbf{Max. one sentence.}}
+\item Describe hyperparameter optimization if any. Give the final values of hyperparameters. {\color{red}\textbf{Max. two sentences.}}
+\item Give your evaluation results as text or a table.
+\end{enumerate}
+}
+
+%%% Your answer here
+\textbf{Answer (a)} -  Preprocessing \& feature transformations:
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\textbf{Answer (b)} - Model choice:
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\textbf{Answer (c)} - Evaluation setup:
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\textbf{Answer (d)} - Hyperparameters:
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\textbf{Answer (e)} - Results:
+\begin{itemize}
+	\item 
+\end{itemize}
+
+
+\end{enumerate}
+\end{document}
