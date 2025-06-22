@@ -17,8 +17,8 @@
 \usepackage{float}
 \pagestyle{fancy}
 
-\lhead{Name: \rule{5cm}{0.5pt}}
-\chead{M.Number: \rule{2cm}{0.5pt}}
+\lhead{Name: Muhammad Saim Akram\rule{5cm}{0.5pt}}
+\chead{M.Number: 12344542\rule{2cm}{0.5pt}}
 \rhead{KDDM1 VO (INP.31101UF)}
 \fancyfoot{}
 
@@ -54,17 +54,20 @@ Questions (1), (2), and (3) are related to each other and you may iterate over t
 
 \textbf{Answer (a)} - Preprocessing:
 \begin{itemize}
-	\item 
+	\item Removed non-informative instances (short texts, procedural content) and cleaned text by removing punctuation, stop words, and applying lemmatization.
 \end{itemize}
 
 \textbf{Answer (b)} - Feature computation:
 \begin{itemize}
-	\item 
+	\item max\_features=5000: Limits vocabulary size for computational efficiency while retaining most informative terms.
+	\item min\_df=5: Removes very rare terms that appear in fewer than 5 documents to reduce noise.
+	\item max\_df=0.95: Removes terms appearing in >95\% of documents as they're less discriminative.
+	\item ngram\_range=(1,2): Includes both unigrams and bigrams to capture context and phrases.
 \end{itemize}
 
 \textbf{Answer (c)} - Number of features:
 \begin{itemize}
-	\item
+	\item Extracted 5000 features to balance information retention with computational tractability.
 \end{itemize}
 
 
@@ -81,22 +84,33 @@ Questions (1), (2), and (3) are related to each other and you may iterate over t
 %%% Your answer here
 \textbf{Answer (a)} - Clustering algorithm:
 \begin{itemize}
-	\item 
+	\item Used K-means clustering because it's efficient for high-dimensional sparse TF-IDF data and provides interpretable centroids. K-means works well for document clustering when combined with TF-IDF features.
 \end{itemize}
 
 \textbf{Answer (b)} - Number of clusters:
 \begin{itemize}
-	\item 
+	\item Extracted 12 clusters using silhouette analysis to find the optimal number that maximizes intra-cluster similarity and inter-cluster separation.
 \end{itemize}
 
 \textbf{Answer (c)} - Evaluation:
 \begin{itemize}
-	\item 
+	\item Used silhouette score as evaluation metric, measuring how similar documents are to their own cluster versus other clusters. Final silhouette score: 0.0144.
 \end{itemize}
 
 \textbf{Answer (d)} - Interpretation:
 \begin{itemize}
-	\item 
+	\item Cluster 0: General European parliamentary procedures and institutional discussions based on terms like ``european'', ``commission'', ``member'', ``parliament''.
+	\item Cluster 1: Ukraine conflict and security issues focusing on ``ukraine'', ``war'', ``russia'', ``putin'', ``ukrainian''.
+	\item Cluster 2: Rule of law and democratic governance with emphasis on ``law'', ``rule law'', ``hungary'', ``poland'', ``democracy''.
+	\item Cluster 3: Human rights and international relations discussing ``right'', ``human'', ``human right'', ``people'', ``china''.
+	\item Cluster 4: Health and youth policies addressing ``health'', ``child'', ``young'', ``cancer'', ``mental health''.
+	\item Cluster 5: Women's rights and gender equality covering ``woman'', ``violence'', ``gender'', ``abortion'', ``equality''.
+	\item Cluster 6: Climate change and environmental policy with ``climate'', ``food'', ``farmer'', ``animal'', ``emission''.
+	\item Cluster 7: Schengen area and border policies focusing on ``schengen'', ``romania'', ``bulgaria'', ``border'', ``croatia''.
+	\item Cluster 8: Procedural parliamentary matters including ``card'', ``blue card'', ``question'', ``speech'', ``voting''.
+	\item Cluster 9: Energy crisis and market policies discussing ``energy'', ``gas'', ``price'', ``crisis'', ``renewable''.
+	\item Cluster 10: Administrative and written statements with ``written statement'', ``article 171'', ``discussion closed''.
+	\item Cluster 11: Agenda and voting procedures containing ``vote'', ``agenda'', ``point agenda'', ``next point''.
 \end{itemize}
 
 
@@ -116,21 +130,21 @@ Questions (1), (2), and (3) are related to each other and you may iterate over t
 \begin{figure}[H]
 	\centering
 	\adjustbox{frame}{
-		\includegraphics[width=0.8\textwidth]{example-image}
+		\includegraphics[width=0.8\textwidth]{pca_cluster_plot}
 	}
-	\caption{Cluster quality vs. number of clusters}
-	\label{fig:example}
+	\caption{Parliamentary Debates Clusters in 2D PCA Space}
+	\label{fig:pca_clusters}
 \end{figure}
 
 \textbf{Answer (b)} -  Cluster separation:
 \begin{itemize}
-	\item 
+	\item Clusters show moderate separation in PCA space with some overlap between related topics, as evidenced by the low explained variance (0.6\%) but reasonable cluster separation score (3.05).
 \end{itemize}
 
 \textbf{Answer (c)} - Interpretation:
 \begin{itemize}
-	\item PCA-1 ...
-	\item PCA-2 ...
+	\item PCA-1 captures the primary distinction between substantive policy discussions (energy, crisis, supply) and procedural parliamentary content (statements, written documents).
+	\item PCA-2 separates administrative procedural matters (discussion, article 171, written statements) from geopolitical content (ukraine, war).
 \end{itemize}
 
 
@@ -158,27 +172,39 @@ Use this new variable as your classification target. Evaluate your classifier by
 %%% Your answer here
 \textbf{Answer (a)} -  Preprocessing \& feature transformations:
 \begin{itemize}
-	\item 
+	\item Encoded categorical file positions (a-h) to numerical values (1-8) using LabelEncoder for machine learning compatibility. Removed rows with missing values and applied standard scaling to features.
 \end{itemize}
 
 \textbf{Answer (b)} - Model choice:
 \begin{itemize}
-	\item 
+	\item Used Random Forest classifier because it handles mixed categorical/numerical features well, provides feature importance, and is robust to outliers. Random Forest also performs well on classification tasks with moderate-sized datasets without requiring extensive feature engineering.
 \end{itemize}
 
 \textbf{Answer (c)} - Evaluation setup:
 \begin{itemize}
-	\item 
+	\item Used 80/20 train-test split with stratified sampling and 5-fold cross-validation for hyperparameter tuning, evaluating with accuracy as primary metric.
 \end{itemize}
 
 \textbf{Answer (d)} - Hyperparameters:
 \begin{itemize}
-	\item 
+	\item Optimized n\_estimators, max\_depth, min\_samples\_split, and min\_samples\_leaf using GridSearchCV across 81 parameter combinations. Final hyperparameters: max\_depth=20, min\_samples\_leaf=1, min\_samples\_split=2, n\_estimators=300.
 \end{itemize}
 
 \textbf{Answer (e)} - Results:
 \begin{itemize}
-	\item 
+	\item \textbf{Cross-validation accuracy:} 0.9120
+	\item \textbf{Test accuracy:} 0.9273
+	\item \textbf{Precision (weighted):} 0.9270
+	\item \textbf{Recall (weighted):} 0.9273
+	\item \textbf{F1-score (weighted):} 0.9270
+	\item \textbf{Per-class performance:}
+	\begin{itemize}
+		\item Level 0 (Draw): Precision=0.88, Recall=0.84, F1=0.86
+		\item Level 1 (Quick win): Precision=0.96, Recall=0.90, F1=0.93
+		\item Level 2 (Medium win): Precision=0.92, Recall=0.90, F1=0.91
+		\item Level 3 (Long win): Precision=0.93, Recall=0.92, F1=0.92
+		\item Level 4 (Very long win): Precision=0.94, Recall=0.96, F1=0.95
+	\end{itemize}
 \end{itemize}
 
 
